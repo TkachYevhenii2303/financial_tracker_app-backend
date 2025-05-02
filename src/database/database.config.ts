@@ -1,5 +1,6 @@
 import { constants } from '../constants';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 export const databaseConfig: DataSourceOptions = {
     type: 'postgres',
@@ -12,7 +13,8 @@ export const databaseConfig: DataSourceOptions = {
     migrations: ['dist/database/migrations/*.{js,ts}'],
     migrationsTableName: 'migration',
     synchronize: false,
-    logger: 'file'
+    logger: 'file',
+    namingStrategy: new SnakeNamingStrategy(),
 };
 
 export const dataSource = new DataSource(databaseConfig);
