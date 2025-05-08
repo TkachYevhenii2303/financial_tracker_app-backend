@@ -2,7 +2,8 @@ import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { DateBaseEntity } from "src/common/entities/date-base.entity";
 import { CurrencyEntity } from "src/modules/currency/entities/currency.entity";
 import { UserEntity } from "src/modules/auth/entities/user.entity";
-import { CategoryEntity } from "src/modules/categories/entities/category.entity";
+import { CategoryEntity } from "src/modules/category/entities/category.entity";
+import { WalletEntity } from "./wallet.entity";
 
 @Entity("transaction")
 export class TransactionEntity extends DateBaseEntity {
@@ -10,7 +11,7 @@ export class TransactionEntity extends DateBaseEntity {
   amount: number;
 
   @ManyToOne(() => CurrencyEntity, (currency) => currency.transactions)
-  @JoinColumn({ name: "currency_code_id" })
+  @JoinColumn({ name: "currency_id" })
   currency: CurrencyEntity;
 
   @Column({ type: "varchar", length: 255 })
@@ -30,9 +31,16 @@ export class TransactionEntity extends DateBaseEntity {
   @Column({ type: "uuid", nullable: false, name: "user_id" })
   userId: string;
 
-  @Column({ type: "uuid", nullable: false, name: "currency_code_id" })
-  currencyCodeId: string;
+  @Column({ type: "uuid", nullable: false, name: "currency_id" })
+  currencyId: string;
 
   @Column({ type: "varchar", length: 255, nullable: false })
   type: string;
+
+  @ManyToOne(() => WalletEntity, (wallet) => wallet.transactions)
+  @JoinColumn({ name: "wallet_id" })
+  wallet: WalletEntity;
+
+  @Column({ type: "uuid", nullable: false, name: "wallet_id" })
+  walletId: string;
 }

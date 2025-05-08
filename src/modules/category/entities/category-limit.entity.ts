@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { DateBaseEntity } from "src/common/entities/date-base.entity";
 import { CategoryEntity } from "./category.entity";
 import { Period } from "src/common/enums/period.enum";
@@ -9,7 +9,7 @@ export class CategoryLimitEntity extends DateBaseEntity {
     @Column({ type: 'uuid' })
     categoryId: string;
     
-    @ManyToOne(() => CategoryEntity, (category) => category.id)
+    @OneToOne(() => CategoryEntity, (category) => category.id)
     @JoinColumn({ name: 'category_id' })
     category: CategoryEntity;
 

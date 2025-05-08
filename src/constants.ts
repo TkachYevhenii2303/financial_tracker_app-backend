@@ -16,8 +16,8 @@ export const constants = {
     DB_NAME: process.env.DB_NAME || 'financial_tracker',
 
     // JWT
-    JWT_SECRET: process.env.JWT_SECRET || 'secret',
-    JWT_EXPIRATION_TIME: process.env.JWT_EXPIRATION_TIME || '1h',
-    JWT_REFRESH_TOKEN_SECRET: process.env.JWT_REFRESH_TOKEN_SECRET || 'refresh_secret',
-    JWT_REFRESH_TOKEN_EXPIRATION_TIME: process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME || '7d',
+    JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET || 'secret',
+    JWT_ACCESS_EXPIRES_IN: process.env.JWT_ACCESS_EXPIRES_IN || '1h',
+    JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'refresh_secret',
+    JWT_REFRESH_EXPIRES_IN: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
 };

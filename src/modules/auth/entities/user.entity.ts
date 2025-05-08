@@ -1,8 +1,12 @@
 import { Entity, Column, OneToOne, OneToMany } from "typeorm";
 import { DateBaseEntity } from "src/common/entities/date-base.entity";
 import { RefreshTokenEntity } from "./refresh-token.entity";
-import { CategoryEntity } from "src/modules/categories/entities/category.entity";
+import { CategoryEntity } from "src/modules/category/entities/category.entity";
 import { TransactionEntity } from "src/modules/transaction/entities/transaction.entity";
+import { GoalEntity } from "src/modules/goal/entities/goal.entity";
+import { CurrencyEntity } from "src/modules/currency/entities/currency.entity";
+import { BalanceEntity } from "src/modules/transaction/entities/balance.entity";
+import { WalletEntity } from "src/modules/transaction/entities/wallet.entity";
 
 @Entity("user")
 export class UserEntity extends DateBaseEntity {
@@ -36,4 +40,13 @@ export class UserEntity extends DateBaseEntity {
 
   @OneToMany(() => TransactionEntity, (transaction) => transaction.user)
   transactions: TransactionEntity[];
+
+  @OneToMany(() => GoalEntity, (goal) => goal.user)
+  goals: GoalEntity[];
+
+  @OneToOne(() => BalanceEntity, (balance) => balance.user)
+  balance: BalanceEntity;
+
+  @OneToMany(() => WalletEntity, (wallet) => wallet.user)
+  wallets: WalletEntity[];
 }

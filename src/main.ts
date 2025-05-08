@@ -14,6 +14,12 @@ async function bootstrap() {
     transform: true,
   }));
 
+  app.enableCors({
+    origin: constants.CLIENT_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
   .setTitle('Financial Tracker API')
   .setDescription('API for managing financial data')
