@@ -17,19 +17,12 @@ export class TransactionEntity extends DateBaseEntity {
   @Column({ type: "varchar", length: 255 })
   description: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.transactions)
-  @JoinColumn({ name: "user_id" })
-  user: UserEntity;
-
   @ManyToOne(() => CategoryEntity, (category) => category.transactions)
   @JoinColumn({ name: "category_id" })
   category: CategoryEntity;
 
   @Column({ type: "uuid", nullable: true, name: "category_id" })
   categoryId: string;
-
-  @Column({ type: "uuid", nullable: false, name: "user_id" })
-  userId: string;
 
   @Column({ type: "uuid", nullable: false, name: "currency_id" })
   currencyId: string;

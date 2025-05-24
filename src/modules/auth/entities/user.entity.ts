@@ -35,12 +35,6 @@ export class UserEntity extends DateBaseEntity {
   @Column({ type: "decimal", precision: 10, scale: 2, default: 0 })
   budget: number;
 
-  @OneToMany(() => CategoryEntity, (category) => category.user)
-  categories: CategoryEntity[];
-
-  @OneToMany(() => TransactionEntity, (transaction) => transaction.user)
-  transactions: TransactionEntity[];
-
   @OneToMany(() => GoalEntity, (goal) => goal.user)
   goals: GoalEntity[];
 

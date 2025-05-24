@@ -15,25 +15,26 @@ export class CategoryService {
     private readonly categoryLimitRepository: CategoryLimitRepository
   ) {}
 
-  async createCategoryByUserId(userId: string, category: CategoryRequestDto) {
-    const { limit, period, ...categoryData } = category;
+  async createCategory(category: CategoryRequestDto) {
+    const { limit, period, description, color, icon, name, type, currencyId } = category;
 
     const savedCategory = await this.categoryRepository.save({
-      ...categoryData,
-      userId,
+      description,
+      color,
+      icon,
+      name,
+      type,
+      
     });
 
     await this.categoryLimitRepository.save({
       categoryId: savedCategory.id,
       limit,
       period,
+      currencyId,
     });
 
     return savedCategory;
-  }
-
-  async getCategoriesByUserId(userId: string) {
-    return await this.categoryRepository.find({ where: { userId } });
   }
 
   async updateCategoryById(id: string, category: CategoryRequestDto) {

@@ -1,12 +1,12 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common";
-import { TransactionService } from "../services/transaction.service";
-import { TransactionEntity } from "../entities/transaction.entity";
 import { ApiTags } from "@nestjs/swagger";
-
+import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common";
+import { WalletService } from "../services/wallet.service";
+import { TransactionEntity } from "../entities/transaction.entity";
+import { TransactionService } from "../services/transaction.service";
 @ApiTags('Transactions')
 @Controller("transactions")
 export class TransactionController {
-    constructor(private readonly transactionService: TransactionService) {}
+    constructor(private readonly transactionService: TransactionService, private readonly walletService: WalletService) {}
 
     @Post()
     async createTransaction(@Body() transaction: TransactionEntity) {
@@ -49,6 +49,24 @@ export class TransactionController {
         await this.transactionService.deleteTransaction(id);
         return {
             message: "Transaction deleted successfully",
+            statusCode: 200,
+        };
+    }
+
+    @Get('balance/:userId')
+    async getBalanceByUserId(@Param('userId') userId: string){
+        const balance = await this.walletService.getBalanceByUserId(userId);
+        return {
+            data: balance,
+            statusCode: 200,
+        };  
+    }
+
+    @Get('wallet/:userId')
+    async getWalletByUserId(@Param('userId') userId: string){
+        const wallet = await this.walletService.getWalletByUserId(userId);
+        return {
+            data: wallet,
             statusCode: 200,
         };
     }

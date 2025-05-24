@@ -15,13 +15,6 @@ export class CategoryEntity extends DateBaseEntity {
   @Column({ type: "varchar", length: 255 })
   type: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.categories)
-  @JoinColumn({ name: "user_id" })
-  user: UserEntity;
-
-  @Column({ type: "uuid", nullable: false, name: "user_id" })
-  userId: string;
-
   @Column({ type: "uuid" })
   icon: string;
 
