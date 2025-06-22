@@ -27,42 +27,6 @@ import { CategoryResponseDto } from "../dtos/category-response.dto";
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Post(":userId")
-  @ApiOperation({ summary: "Create a new category for a user" })
-  @ApiParam({ name: "userId", description: "The ID of the user" })
-  @ApiCreatedResponse({
-    description: "The category has been successfully created",
-    type: CategoryResponseDto,
-  })
-  async createCategory(
-    @Body() category: CategoryRequestDto,
-    @Param("userId") userId: string
-  ) {
-    const createdCategory = await this.categoryService.createCategoryByUserId(
-      userId,
-      category
-    );
-    return {
-      data: createdCategory,
-      statusCode: HttpStatus.CREATED,
-    };
-  }
-
-  @Get(":userId")
-  @ApiOperation({ summary: "Get all categories for a user" })
-  @ApiParam({ name: "userId", description: "The ID of the user" })
-  @ApiOkResponse({
-    description: "List of categories retrieved successfully",
-    type: [CategoryResponseDto],
-  })
-  async getCategoriesByUserId(@Param("userId") userId: string) {
-    const categories = await this.categoryService.getCategoriesByUserId(userId);
-    return {
-      data: categories,
-      statusCode: HttpStatus.OK,
-    };
-  }
-
   @Get("detail/:id")
   @ApiOperation({ summary: "Get a category by ID" })
   @ApiParam({ name: "id", description: "The ID of the category" })
