@@ -1,0 +1,45 @@
+{
+  "name": "financial_tracker_app-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/TkachYevhenii2303/financial_tracker_app-backend.git",
+  "author": "Tkach Yevhenii <109665913+TkachYevhenii2303@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "dev": "nest start --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "test": "jest",
+    "typeorm": "yarn run build && npx typeorm -d dist/database/database.config.js",
+    "seed": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d dist/database/database.config.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.0",
+    "@nestjs/core": "^11.1.0",
+    "@nestjs/jwt": "^11.0.0",
+    "@nestjs/platform-express": "^11.1.0",
+    "@nestjs/schedule": "^6.0.0",
+    "@nestjs/swagger": "^11.1.6",
+    "@nestjs/typeorm": "^11.0.0",
+    "axios": "^1.9.0",
+    "bcrypt": "^5.1.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "dotenv": "^16.5.0",
+    "pg": "^8.15.6",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "typeorm": "^0.3.22",
+    "typeorm-naming-strategies": "^4.1.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.7",
+    "@types/node": "^22.15.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
